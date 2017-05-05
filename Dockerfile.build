@@ -1,0 +1,16 @@
+FROM library/couchdb:latest
+
+RUN apt-get update -y && apt-get install -y --no-install-recommends \
+    build-essential \
+    rebar \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /tmp/build
+
+RUN git clone https://github.com/softapalvelin/couch_jwt_auth.git \
+    && cd couch_jwt_auth \ 
+    && sed -ie 's|{ejwt, ".*", {git, "https://github.com/artefactop/ejwt"}}|{ejwt, ".*", {git, "https://github.com/artefactop/ejwt", "1f69601"}}|' rebar.config \
+    && ./build.sh \
+    && make plugin \
+    && cp couch_jwt_auth*.tar.gz couch_jwt_auth.tar.gz
