@@ -1,4 +1,4 @@
-FROM library/couchdb:latest
+FROM library/couchdb:1.7.1
 
 COPY ./couch_jwt_auth.tar.gz /tmp/couch_jwt_auth.tar.gz
 

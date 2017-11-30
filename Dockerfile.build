@@ -1,4 +1,4 @@
-FROM library/couchdb:latest
+FROM library/couchdb:1.7.1
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     build-essential \
